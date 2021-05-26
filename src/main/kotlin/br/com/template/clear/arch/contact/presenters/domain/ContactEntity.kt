@@ -1,7 +1,7 @@
 package br.com.template.clear.arch.contact.presenters.domain
 
-import br.com.template.clear.arch.contact.service.use_case.data.ContactOutputPort
-import br.com.template.clear.arch.contact.service.use_case_port.data.ContactPort
+import br.com.template.clear.arch.contact.service.use_case_port.data.ContactInputPort
+import br.com.template.clear.arch.contact.service.use_case_port.data.ContactOutputPort
 import javax.persistence.*
 
 @Entity
@@ -16,30 +16,22 @@ data class ContactEntity (
         val phone: String = ""
 )
 
-fun ContactEntity.toContactOutputPort() : ContactPort {
-        return ContactPort(
-                id = this.id,
-                name = this.name,
-                email = this.email,
-                phone = this.phone
-        )
-}
-
-fun ContactEntity.toContactOutputPortV1() : ContactOutputPort {
-        return ContactOutputPort(
-                id = this.id,
-                name = this.name,
-                email = this.email,
-                phone = this.phone
-        )
-}
-
-fun ContactPort.toContactEntity() : ContactEntity{
+fun ContactInputPort.toContactEntity() : ContactEntity{
         return ContactEntity(
                 id = 0,
                 name = this.name,
                 email = this.email,
                 phone = this.phone,
+        )
+}
+
+fun ContactEntity.toContactOutputPort() : ContactOutputPort {
+        return ContactOutputPort(
+        id = id,
+        name = name,
+        email = email,
+        phone = phone,
+
         )
 }
 
